@@ -12,3 +12,11 @@ var client = new Twitter(keys.twitter);
 
 //accepting arguments
 var argv = process.argv;
+//obtains argument that will determine what liri will do
+var argument = argv[2];
+console.log(argument);
+//my-tweets: This will show your last 20 tweets and when they were created 
+// at in your terminal/bash window.
+
+
+
