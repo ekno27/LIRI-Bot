@@ -32,16 +32,24 @@ console.log(queryPrompt);
 // The song's name
 // A preview link of the song from Spotify
 // The album that the song is from
-if (argument = "spotify-this-song"){
+if (argument === "spotify-this-song"){
+   
     spotify
-    .search({ type: 'track', query: queryPrompt })
-    .then(function(response) {
-      console.log(response.tracks.items[1].artists);
-      var artists="";
-      
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
+    .search({ type: 'track', query: queryPrompt, limit: 5 }, function(err, data) {
+        if (err) {
+          return console.log('Error occurred: ' + err);
+        }
+       //full object
+    //   console.log(data.tracks.items[0]);
+
+      console.log("Artist: " + data.tracks.items[0].artists[0].name);
+
+      console.log("Track: "+ data.tracks.items[0].name); 
+
+      console.log("Album: " + data.tracks.items[0].album.name);
+
+      console.log("Preview link: "+  data.tracks.items[0].external_urls.spotify);
+      });
+    
 }
 
