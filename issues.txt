@@ -1,0 +1,5 @@
+Things I had difficulty figuring out
+
+1. Initial setup: 
+    Getting all the requirements without errors turned out 
+    to be quite difficult
