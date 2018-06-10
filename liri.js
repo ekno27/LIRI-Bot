@@ -16,6 +16,18 @@ var argv = process.argv;
 var argument = argv[2];
 console.log(argument);
 
+//obtaining the query
+var queryPrompt ="";
+if(argv.length>3){
+   
+    for (var i = 3;i< argv.length;i++){
+        queryPrompt += argv[i]+ " "; 
+    }
+    queryPrompt = queryPrompt.substring(0,queryPrompt.length-1);
+    console.log(queryPrompt);
+}
+
+
 
 /**
  * Commands to carry out:
@@ -23,9 +35,9 @@ console.log(argument);
 
 //my-tweets: This will show your last 20 tweets and when they were created at in your terminal/bash window.
 if(argument ==="my-tweets"){
+ 
     client.get("statuses/user_timeline", function(error,tweets,response){
         if(error) throw error;
-        console.log(tweets[1].text);
         //if there's less than 20 tweets, show 'em all, else show only 20
         if(tweets.length<=20){
             for(var i = 0; i<tweets.length;i++){
@@ -44,24 +56,19 @@ if(argument ==="my-tweets"){
     
 }
 
-//obtaining the query 
-var queryPrompt ="";
-for (var i = 3;i< argv.length;i++){
-    queryPrompt += argv[i]+ " "; 
-}
-queryPrompt = queryPrompt.substring(0,queryPrompt.length-1);
-console.log(queryPrompt);
-//my-tweets: This will show your last 20 tweets and when they were created 
-// at in your terminal/bash window.
 
-//2. node liri.js spotify-this-song '<song name here>'
+
+//node liri.js spotify-this-song '<song name here>'
 // This will show the following information about the song in your terminal/bash window
 // Artist(s)
 // The song's name
 // A preview link of the song from Spotify
 // The album that the song is from
 if (argument === "spotify-this-song"){
-   
+    if(queryPrompt===""){
+     queryPrompt = "The Sign ace of bass"  
+    }
+   console.log(queryPrompt);
     spotify
     .search({ type: 'track', query: queryPrompt, limit: 5 }, function(err, data) {
         if (err) {
