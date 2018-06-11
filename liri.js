@@ -5,6 +5,7 @@ var Twitter = require("twitter");
 var request = require("request");
 var Spotify = require("node-spotify-api");
 var keys = require("./keys.js");
+var fs = require("fs");
 
 //creating variables to access key information 
 var spotify = new Spotify(keys.spotify);
@@ -14,7 +15,7 @@ var client = new Twitter(keys.twitter);
 var argv = process.argv;
 //obtains argument that will determine what liri will do
 var argument = argv[2];
-console.log(argument);
+// console.log(argument);
 
 //obtaining the query
 var queryPrompt ="";
@@ -24,12 +25,12 @@ if(argv.length>3){
         queryPrompt += argv[i]+ " "; 
     }
     queryPrompt = queryPrompt.substring(0,queryPrompt.length-1);
-    console.log(queryPrompt);
+    // console.log(queryPrompt);
 }
+execute(argument,queryPrompt);
 
-
-
-/**
+function execute(argument, queryPrompt){
+    /**
  * Commands to carry out:
  */
 
@@ -69,7 +70,6 @@ if (argument === "spotify-this-song"){
     if(queryPrompt===""){
      queryPrompt = "The Sign ace of bass"  
     }
-   console.log(queryPrompt);
     spotify
     .search({ type: 'track', query: queryPrompt, limit: 5 }, function(err, data) {
         if (err) {
@@ -86,7 +86,7 @@ if (argument === "spotify-this-song"){
 
       console.log("Preview link: "+  data.tracks.items[0].external_urls.spotify);
       });
-    
+
 }
 
 /**
@@ -108,7 +108,7 @@ if (argument === "spotify-this-song"){
          queryPrompt= "Mr. Nobody";
      }
      var queryURL = "http://www.omdbapi.com/?t="+queryPrompt +"&y=&plot=short&apikey=trilogy";
-    console.log(queryURL);
+    // console.log(queryURL);
      request(queryURL, function(error, response, body) {
     // If the request is successful (i.e. if the response status code is 200)
     if (!error && response.statusCode === 200) {
@@ -124,4 +124,26 @@ if (argument === "spotify-this-song"){
     });
 
  }
+
+ if (argument ==="do-what-it-says"){
+     
+     fs.readFile("random.txt","utf8",function(error,data){
+         if(error){
+             return console.log(error);
+         }
+         console.log(data);
+         var dataArr = data.split(",");
+         argument = dataArr[0];
+         queryPrompt = JSON.parse(dataArr[1]);
+         execute(argument, queryPrompt); 
+
+     });
+
+ }
+
+}
+
+
+
+
 
