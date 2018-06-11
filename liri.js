@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 var Twitter = require("twitter");
-var request = require("request")
+var request = require("request");
 var Spotify = require("node-spotify-api");
 var keys = require("./keys.js");
 
@@ -27,11 +27,6 @@ if(argv.length>3){
     console.log(queryPrompt);
 }
 
-<<<<<<< HEAD
-/**movie-this: '<movie name here>'
- * 
- */
-=======
 
 
 /**
@@ -94,4 +89,36 @@ if (argument === "spotify-this-song"){
     
 }
 
->>>>>>> 61ae0985904977b70e5731dfc63731220f24a546
+/**
+ * movie-this '<movie name here>'
+ * This will output the following information to your terminal/bash window:
+
+  * Title of the movie.
+  * Year the movie came out.
+  * IMDB Rating of the movie.
+  * Rotten Tomatoes Rating of the movie.
+  * Country where the movie was produced.
+  * Language of the movie.
+  * Plot of the movie.
+  * Actors in the movie.
+ */
+
+ if(argument ==="movie-this"){
+     var queryURL = "http://www.omdbapi.com/?t="+queryPrompt +"&y=&plot=short&apikey=trilogy";
+    console.log(queryURL);
+     request(queryURL, function(error, response, body) {
+    // If the request is successful (i.e. if the response status code is 200)
+    if (!error && response.statusCode === 200) {
+
+    console.log("Name of film: "+ JSON.parse(body).Title);
+    console.log("Release date: "+ JSON.parse(body).Released);
+    console.log("Rating: " + JSON.parse(body).imdbRating);
+    console.log("Country of production: " + JSON.parse(body).Country);
+    console.log("Language: " + JSON.parse(body).Language);
+    console.log("Plot: " + JSON.parse(body).Plot);
+    console.log("Actors: " + JSON.parse(body).Actors);
+        }
+    });
+
+ }
+
