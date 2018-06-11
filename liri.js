@@ -104,6 +104,9 @@ if (argument === "spotify-this-song"){
  */
 
  if(argument ==="movie-this"){
+     if(queryPrompt ===""){
+         queryPrompt= "Mr. Nobody";
+     }
      var queryURL = "http://www.omdbapi.com/?t="+queryPrompt +"&y=&plot=short&apikey=trilogy";
     console.log(queryURL);
      request(queryURL, function(error, response, body) {
