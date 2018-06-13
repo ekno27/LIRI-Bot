@@ -4,7 +4,7 @@ Liri is a command line node app that takes in parameters and gives you back data
 #### 1. node liri.js my-tweets 
   * This will show your last 20 tweets and when they were created at in your terminal/bash window. If you have less than 20 tweets, it will show all of them
   * Your tweets will be retrieved using the twitter node modules 
-#### 2. node liri.js spotify-this-song\'<song name here>\'
+#### 2. node liri.js spotify-this-song \<song name here>\
    * This will show the following information about the song in your terminal/bash window 
             * Artist(s)
             * The song's name
